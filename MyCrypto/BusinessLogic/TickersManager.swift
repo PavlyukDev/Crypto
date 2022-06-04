@@ -18,11 +18,20 @@ final class TickersManagerImpl: TickersManager {
         static let pollingInterval: Int = 5
     }
     private let api: ApiService
+    var tickers: [Ticker] = Ticker.allCases
+
     init(api: ApiService = ApiService()) {
         self.api = api
     }
 
     func start() -> Observable<[TickerModel]> {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 4
+        formatter.minimumFractionDigits = 0
+        formatter.numberStyle = .currency
+//        formatter.positiveFormat = "###,###,###,###.#### ¤"
+        formatter.currencySymbol = "$ "
+
         return Observable<[TickerModel]>.create { observer -> Disposable in
 
             let interval = Observable<Int>.interval(.seconds(Consts.pollingInterval), scheduler: MainScheduler.instance)
@@ -30,18 +39,23 @@ final class TickersManagerImpl: TickersManager {
 
             let subscription = interval
                 .flatMap { _ in
-                    return self.api.getTickers().asObservable()
+                    return self.api.getTickers(tikers: self.tickers.map{ $0.id }).asObservable()
                 }
                 .subscribe(onNext: { response in
-
-
-
-                    let models = response.map { response in
-                        TickerModel(name: response.id,
-                                    price: response.price.stringValue,
-                                    symbol: response.id)
+                    do {
+                        let models = try response
+                            .map { response -> TickerModel in
+                                guard let ticker = Ticker(rawValue: response.id) else {
+                                    throw NSError(domain: "TickersManager.polling", code: 0)
+                                }
+                                return TickerModel(ticker: ticker,
+                                                   price: formatter.string(for: response.price) ?? "")
+                            }
+                        observer.onNext(models)
+                    } catch {
+                        observer.onError(error)
                     }
-                    observer.onNext(models)
+
 //                    observer.onCompleted()
                 },onError: { error in
                     print(error)

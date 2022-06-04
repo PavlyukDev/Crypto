@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class ListViewController: UIViewController, UITableViewDataSource {
+class ListViewController: UIViewController {
     let tableView: UITableView = .init()
     let viewModel = ListViewModel()
 
@@ -16,20 +16,10 @@ class ListViewController: UIViewController, UITableViewDataSource {
 
     private lazy var dataSource: UITableViewDiffableDataSource<TickerSection, TickerModel> = {
         let dataSource = UITableViewDiffableDataSource<TickerSection, TickerModel>(tableView: tableView) { tableView, indexPath, ticker in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TickerCell", for: indexPath)
-
-            var content = cell.defaultContentConfiguration()
-
-
-//            content.image = UIImage(systemName: "star")
-            content.text = ticker.name
-            content.secondaryText = ticker.price
-
-            // Customize appearance.
-//            content.imageProperties.tintColor = .purple
-
-            cell.contentConfiguration = content
-
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TickerCell", for: indexPath) as? TickerCell else {
+                return UITableViewCell()
+            }
+            cell.update(with: ticker)
             return cell
         }
 
@@ -44,11 +34,12 @@ class ListViewController: UIViewController, UITableViewDataSource {
 
     // MARK: - Private
     private func setupUI() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TickerCell")
+        tableView.register(TickerCell.self, forCellReuseIdentifier: "TickerCell")
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableView.automaticDimension
 
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.dataSource = self
 
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -63,7 +54,7 @@ class ListViewController: UIViewController, UITableViewDataSource {
             var snapshot = NSDiffableDataSourceSnapshot<TickerSection, TickerModel>()
             snapshot.appendSections([.main])
             snapshot.appendItems(models)
-            self?.dataSource.apply(snapshot)
+            self?.dataSource.apply(snapshot, animatingDifferences: false)
         }.disposed(by: bag)
         viewModel.start()
     }
@@ -79,17 +70,3 @@ class ListViewController: UIViewController, UITableViewDataSource {
 }
 
 
-final class TickerCell: UITableViewCell {
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setupUI() {
-
-    }
-}

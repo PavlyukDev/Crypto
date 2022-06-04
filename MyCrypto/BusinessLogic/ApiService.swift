@@ -18,10 +18,10 @@ struct ApiService {
     init(provider: MoyaProvider<Crypto> = MoyaProvider<Crypto>()) {
         self.provider = provider
     }
-    func getTickers() -> Single<[TickerResponse]> {
+    func getTickers(tikers: [String]) -> Single<[TickerResponse]> {
         provider
             .rx
-            .request(.tickers(symbols: ["tBTCUSD"]))
+            .request(.tickers(symbols: tikers))
             .map([TickerResponse].self)
     }
 }
