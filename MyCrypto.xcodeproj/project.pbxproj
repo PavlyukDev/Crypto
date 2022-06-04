@@ -10,13 +10,17 @@
 		2168E80932A7913894EA848C /* Pods_MyCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CCA711B6F114ACC415D4148 /* Pods_MyCrypto.framework */; };
 		5109FE702847DCF90090DA7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FE6F2847DCF90090DA7A /* AppDelegate.swift */; };
 		5109FE722847DCF90090DA7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FE712847DCF90090DA7A /* SceneDelegate.swift */; };
-		5109FE742847DCF90090DA7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FE732847DCF90090DA7A /* ViewController.swift */; };
+		5109FE742847DCF90090DA7A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FE732847DCF90090DA7A /* ListViewController.swift */; };
 		5109FE772847DCF90090DA7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5109FE752847DCF90090DA7A /* Main.storyboard */; };
 		5109FE792847DCFD0090DA7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5109FE782847DCFD0090DA7A /* Assets.xcassets */; };
 		5109FE7C2847DCFD0090DA7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5109FE7A2847DCFD0090DA7A /* LaunchScreen.storyboard */; };
 		5109FE872847DCFD0090DA7A /* MyCryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FE862847DCFD0090DA7A /* MyCryptoTests.swift */; };
 		5109FE912847DCFD0090DA7A /* MyCryptoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FE902847DCFD0090DA7A /* MyCryptoUITests.swift */; };
 		5109FE932847DCFD0090DA7A /* MyCryptoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FE922847DCFD0090DA7A /* MyCryptoUITestsLaunchTests.swift */; };
+		5109FEA62848FB160090DA7A /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FEA52848FB160090DA7A /* ApiService.swift */; };
+		5109FEA82848FB410090DA7A /* TickersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FEA72848FB410090DA7A /* TickersManager.swift */; };
+		5109FEAB284905560090DA7A /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FEAA284905560090DA7A /* ListViewModel.swift */; };
+		5109FEAD284B33150090DA7A /* TickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FEAC284B33150090DA7A /* TickerResponse.swift */; };
 		B65EEDEBBA349CC8B550785C /* Pods_MyCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294464E017B9FDE1C185441F /* Pods_MyCryptoTests.framework */; };
 		CC6AAC8D5CB2060147A436AC /* Pods_MyCrypto_MyCryptoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1178F16EB68CCAF1717A6082 /* Pods_MyCrypto_MyCryptoUITests.framework */; };
 /* End PBXBuildFile section */
@@ -47,7 +51,7 @@
 		5109FE6C2847DCF90090DA7A /* MyCrypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCrypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5109FE6F2847DCF90090DA7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5109FE712847DCF90090DA7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5109FE732847DCF90090DA7A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5109FE732847DCF90090DA7A /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		5109FE762847DCF90090DA7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5109FE782847DCFD0090DA7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5109FE7B2847DCFD0090DA7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +61,10 @@
 		5109FE8C2847DCFD0090DA7A /* MyCryptoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyCryptoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5109FE902847DCFD0090DA7A /* MyCryptoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCryptoUITests.swift; sourceTree = "<group>"; };
 		5109FE922847DCFD0090DA7A /* MyCryptoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCryptoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5109FEA52848FB160090DA7A /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		5109FEA72848FB410090DA7A /* TickersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersManager.swift; sourceTree = "<group>"; };
+		5109FEAA284905560090DA7A /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		5109FEAC284B33150090DA7A /* TickerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerResponse.swift; sourceTree = "<group>"; };
 		5CCA711B6F114ACC415D4148 /* Pods_MyCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C68E175442FD02F8402BC5 /* Pods-MyCryptoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCryptoTests.debug.xcconfig"; path = "Target Support Files/Pods-MyCryptoTests/Pods-MyCryptoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D8172EEB718876B8CF0CB6FB /* Pods-MyCrypto-MyCryptoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCrypto-MyCryptoUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyCrypto-MyCryptoUITests/Pods-MyCrypto-MyCryptoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,13 +124,10 @@
 		5109FE6E2847DCF90090DA7A /* MyCrypto */ = {
 			isa = PBXGroup;
 			children = (
-				5109FE6F2847DCF90090DA7A /* AppDelegate.swift */,
-				5109FE712847DCF90090DA7A /* SceneDelegate.swift */,
-				5109FE732847DCF90090DA7A /* ViewController.swift */,
-				5109FE752847DCF90090DA7A /* Main.storyboard */,
-				5109FE782847DCFD0090DA7A /* Assets.xcassets */,
-				5109FE7A2847DCFD0090DA7A /* LaunchScreen.storyboard */,
-				5109FE7D2847DCFD0090DA7A /* Info.plist */,
+				5109FEA42848FB040090DA7A /* BusinessLogic */,
+				5109FEA32848F61D0090DA7A /* StartPoint */,
+				5109FE9F2848F5DB0090DA7A /* Presentation */,
+				5109FEA02848F5F90090DA7A /* Resources */,
 			);
 			path = MyCrypto;
 			sourceTree = "<group>";
@@ -142,6 +147,53 @@
 				5109FE922847DCFD0090DA7A /* MyCryptoUITestsLaunchTests.swift */,
 			);
 			path = MyCryptoUITests;
+			sourceTree = "<group>";
+		};
+		5109FE9F2848F5DB0090DA7A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				5109FEA92849053F0090DA7A /* List */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		5109FEA02848F5F90090DA7A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5109FE752847DCF90090DA7A /* Main.storyboard */,
+				5109FE782847DCFD0090DA7A /* Assets.xcassets */,
+				5109FE7A2847DCFD0090DA7A /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5109FEA32848F61D0090DA7A /* StartPoint */ = {
+			isa = PBXGroup;
+			children = (
+				5109FE6F2847DCF90090DA7A /* AppDelegate.swift */,
+				5109FE712847DCF90090DA7A /* SceneDelegate.swift */,
+				5109FE7D2847DCFD0090DA7A /* Info.plist */,
+			);
+			path = StartPoint;
+			sourceTree = "<group>";
+		};
+		5109FEA42848FB040090DA7A /* BusinessLogic */ = {
+			isa = PBXGroup;
+			children = (
+				5109FEA52848FB160090DA7A /* ApiService.swift */,
+				5109FEA72848FB410090DA7A /* TickersManager.swift */,
+				5109FEAC284B33150090DA7A /* TickerResponse.swift */,
+			);
+			path = BusinessLogic;
+			sourceTree = "<group>";
+		};
+		5109FEA92849053F0090DA7A /* List */ = {
+			isa = PBXGroup;
+			children = (
+				5109FE732847DCF90090DA7A /* ListViewController.swift */,
+				5109FEAA284905560090DA7A /* ListViewModel.swift */,
+			);
+			path = List;
 			sourceTree = "<group>";
 		};
 		80FC77A3ACD5B42CD15E0962 /* Pods */ = {
@@ -406,8 +458,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5109FE742847DCF90090DA7A /* ViewController.swift in Sources */,
+				5109FE742847DCF90090DA7A /* ListViewController.swift in Sources */,
 				5109FE702847DCF90090DA7A /* AppDelegate.swift in Sources */,
+				5109FEAD284B33150090DA7A /* TickerResponse.swift in Sources */,
+				5109FEAB284905560090DA7A /* ListViewModel.swift in Sources */,
+				5109FEA82848FB410090DA7A /* TickersManager.swift in Sources */,
+				5109FEA62848FB160090DA7A /* ApiService.swift in Sources */,
 				5109FE722847DCF90090DA7A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -586,14 +642,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K6FTTC9WQU;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MyCrypto/Info.plist;
+				INFOPLIST_FILE = MyCrypto/StartPoint/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -615,14 +672,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K6FTTC9WQU;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MyCrypto/Info.plist;
+				INFOPLIST_FILE = MyCrypto/StartPoint/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
