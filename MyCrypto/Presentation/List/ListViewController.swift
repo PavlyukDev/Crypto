@@ -14,8 +14,7 @@ class ListViewController: UIViewController {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.showsSearchResultsController = true
-        searchController.searchResultsUpdater = self
-//        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Filter"
         return searchController
     }()
@@ -68,25 +67,20 @@ class ListViewController: UIViewController {
             self?.dataSource.apply(snapshot, animatingDifferences: false)
         }.disposed(by: bag)
 
-        if let vc = searchController.searchResultsController as? FilterViewController {
-
-            viewModel.tickers.asObservable()
-                .bind(to: vc.sourceSubject)
-                .disposed(by: bag)
-
-        }
-        viewModel.start()
-
         searchController
             .searchBar.rx
             .text
             .bind(to: viewModel.searchSubject)
             .disposed(by: bag)
-    }
-}
 
-extension ListViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
+        searchController
+            .searchBar.rx
+            .cancelButtonClicked
+            .bind(onNext: { [weak self] _ in
+                self?.viewModel.disableSearch()
+            })
+            .disposed(by: bag)
 
+        viewModel.start()
     }
 }

@@ -118,6 +118,11 @@ final class ListViewModel {
             .disposed(by: bag)
     }
 
+    func disableSearch() {
+        selectedTickers.removeAll()
+        isSearchEnabled = false
+    }
+
     // MARK: - Private
     private func updateModels() {
         tickersSubject.accept(tickersSubject.value)

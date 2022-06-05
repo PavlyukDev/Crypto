@@ -23,7 +23,6 @@
 		5109FEAD284B33150090DA7A /* TickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FEAC284B33150090DA7A /* TickerResponse.swift */; };
 		5109FEAF284B811D0090DA7A /* Tickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FEAE284B811D0090DA7A /* Tickers.swift */; };
 		5109FEB1284BA7B40090DA7A /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FEB0284BA7B40090DA7A /* TickerCell.swift */; };
-		5109FEB3284BD8B80090DA7A /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5109FEB2284BD8B80090DA7A /* FilterViewController.swift */; };
 		B65EEDEBBA349CC8B550785C /* Pods_MyCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294464E017B9FDE1C185441F /* Pods_MyCryptoTests.framework */; };
 		CC6AAC8D5CB2060147A436AC /* Pods_MyCrypto_MyCryptoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1178F16EB68CCAF1717A6082 /* Pods_MyCrypto_MyCryptoUITests.framework */; };
 /* End PBXBuildFile section */
@@ -70,7 +69,6 @@
 		5109FEAC284B33150090DA7A /* TickerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerResponse.swift; sourceTree = "<group>"; };
 		5109FEAE284B811D0090DA7A /* Tickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickers.swift; sourceTree = "<group>"; };
 		5109FEB0284BA7B40090DA7A /* TickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerCell.swift; sourceTree = "<group>"; };
-		5109FEB2284BD8B80090DA7A /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		5CCA711B6F114ACC415D4148 /* Pods_MyCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C68E175442FD02F8402BC5 /* Pods-MyCryptoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCryptoTests.debug.xcconfig"; path = "Target Support Files/Pods-MyCryptoTests/Pods-MyCryptoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D8172EEB718876B8CF0CB6FB /* Pods-MyCrypto-MyCryptoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCrypto-MyCryptoUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyCrypto-MyCryptoUITests/Pods-MyCrypto-MyCryptoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 				5109FE732847DCF90090DA7A /* ListViewController.swift */,
 				5109FEAA284905560090DA7A /* ListViewModel.swift */,
 				5109FEB0284BA7B40090DA7A /* TickerCell.swift */,
-				5109FEB2284BD8B80090DA7A /* FilterViewController.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -471,7 +468,6 @@
 				5109FE702847DCF90090DA7A /* AppDelegate.swift in Sources */,
 				5109FEB1284BA7B40090DA7A /* TickerCell.swift in Sources */,
 				5109FEAD284B33150090DA7A /* TickerResponse.swift in Sources */,
-				5109FEB3284BD8B80090DA7A /* FilterViewController.swift in Sources */,
 				5109FEAB284905560090DA7A /* ListViewModel.swift in Sources */,
 				5109FEA82848FB410090DA7A /* TickersManager.swift in Sources */,
 				5109FEAF284B811D0090DA7A /* Tickers.swift in Sources */,
@@ -662,7 +658,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -692,7 +688,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
