@@ -8,36 +8,16 @@
 import Foundation
 import Alamofire
 import Moya
-import RxSwift
+
+
 
 struct ApiService {
-    private let provider: MoyaProvider<Crypto>
-    //plugins: [NetworkLoggerPlugin()]
+    let provider: MoyaProvider<Crypto>
+
     init(provider: MoyaProvider<Crypto> = MoyaProvider<Crypto>() ) {
         self.provider = provider
     }
-
-    func getTickers(tikers: [String],
-                    resultCallback: @escaping ([TickerResponse]) -> Void,
-                    errorCallback: @escaping (Error) -> Void){
-        provider.request(.tickers(symbols: tikers)) { result in
-//            errorCallback(NSError(domain: "some", code: 0))
-
-            switch result {
-            case .success(let response):
-                do {
-                    let tickers = try response.map([TickerResponse].self)
-                    resultCallback(tickers)
-                } catch {
-                    errorCallback(error)
-                }
-            case .failure(let error):
-                errorCallback(error)
-            }
-        }
-    }
 }
-
 
 enum Crypto {
     case tickers(symbols: [String])

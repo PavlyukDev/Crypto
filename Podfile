@@ -12,7 +12,8 @@ target 'MyCrypto' do
 
   target 'MyCryptoTests' do
     inherit! :search_paths
-    # Pods for testing
+    pod 'RxBlocking', '6.5.0'
+    pod 'RxTest', '6.5.0'
   end
 
   target 'MyCryptoUITests' do

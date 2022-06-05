@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TickerResponse: Decodable {
+struct TickerResponse: Decodable, Equatable {
     let id: String
     let price: NSDecimalNumber
 

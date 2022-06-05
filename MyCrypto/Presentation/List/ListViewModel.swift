@@ -78,8 +78,9 @@ final class ListViewModel {
         formatter.maximumFractionDigits = 4
         formatter.minimumFractionDigits = 0
         formatter.numberStyle = .currency
+        formatter.decimalSeparator = "."
         //        formatter.positiveFormat = "###,###,###,###.#### ¤"
-        formatter.currencySymbol = "$ "
+        formatter.currencySymbol = "$"
         return formatter
     }()
 
