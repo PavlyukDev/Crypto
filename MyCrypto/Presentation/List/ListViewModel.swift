@@ -74,8 +74,17 @@ final class ListViewModel {
     private let bag = DisposeBag()
     private let tickersSubject: BehaviorRelay<[TickerModel]> = .init(value: [])
 
+    private var selectedTickers: Set<TickerModel> = []
+    private var isSearchEnabled: Bool = false
+
+    let searchSubject: BehaviorRelay<String?> = .init(value: nil)
+
     var tickers: Driver<[TickerModel]> {
-        tickersSubject.asDriver()
+        tickersSubject
+            .asDriver()
+            .map({ [weak self] models in
+                return self?.filter(with: models) ?? models
+            })
     }
 
     init(manager: TickersManager = TickersManagerImpl()) {
@@ -92,5 +101,43 @@ final class ListViewModel {
                 print(error)
             })
             .disposed(by: bag)
+
+        searchSubject
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] text in
+                defer {
+                    self?.updateModels()
+                }
+                guard let text = text, !text.isEmpty else {
+                    self?.isSearchEnabled = false
+                    return
+                }
+                self?.isSearchEnabled = true
+                self?.chooseSelected(with: text)
+            })
+            .disposed(by: bag)
+    }
+
+    // MARK: - Private
+    private func updateModels() {
+        tickersSubject.accept(tickersSubject.value)
+    }
+    private func chooseSelected(with text: String) {
+        let models = tickersSubject.value
+            .filter { model in
+                return model.name.contains(text)
+                || model.symbol.contains(text)
+            }
+        selectedTickers = Set(models)
+    }
+
+    private func filter(with models: [TickerModel]) -> [TickerModel] {
+        guard isSearchEnabled else {
+            return models
+        }
+        let filtered = models.filter { [weak self] model in
+            return self?.selectedTickers.contains(model) ?? false
+        }
+        return filtered
     }
 }

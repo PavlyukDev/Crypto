@@ -9,8 +9,16 @@ import UIKit
 import RxSwift
 
 class ListViewController: UIViewController {
-    let tableView: UITableView = .init()
-    let viewModel = ListViewModel()
+    private let tableView: UITableView = .init()
+    private let viewModel = ListViewModel()
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.showsSearchResultsController = true
+        searchController.searchResultsUpdater = self
+//        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.searchBar.placeholder = "Filter"
+        return searchController
+    }()
 
     private let bag = DisposeBag()
 
@@ -34,6 +42,9 @@ class ListViewController: UIViewController {
 
     // MARK: - Private
     private func setupUI() {
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+
         tableView.register(TickerCell.self, forCellReuseIdentifier: "TickerCell")
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableView.automaticDimension
@@ -56,17 +67,26 @@ class ListViewController: UIViewController {
             snapshot.appendItems(models)
             self?.dataSource.apply(snapshot, animatingDifferences: false)
         }.disposed(by: bag)
+
+        if let vc = searchController.searchResultsController as? FilterViewController {
+
+            viewModel.tickers.asObservable()
+                .bind(to: vc.sourceSubject)
+                .disposed(by: bag)
+
+        }
         viewModel.start()
-    }
 
-    // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        searchController
+            .searchBar.rx
+            .text
+            .bind(to: viewModel.searchSubject)
+            .disposed(by: bag)
     }
 }
 
+extension ListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
 
+    }
+}
