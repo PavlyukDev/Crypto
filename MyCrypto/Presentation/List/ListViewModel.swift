@@ -149,7 +149,7 @@ final class ListViewModel {
             let models = try response
                 .map { response -> TickerModel in
                     guard let ticker = Ticker(rawValue: response.id) else {
-                        throw NSError(domain: "TickersManager.polling", code: 0)
+                        throw MyCryptoError.unknown
                     }
                     return TickerModel(ticker: ticker,
                                        price: formatter.string(for: response.price) ?? "")

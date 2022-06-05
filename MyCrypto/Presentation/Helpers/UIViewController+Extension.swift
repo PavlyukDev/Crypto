@@ -8,11 +8,12 @@
 import UIKit
 
 extension UIViewController {
-    func showToast(message: String) {
+    func showToast(message: String, autohide: Bool = true) -> UIView {
         let toastContainer = UIView(frame: .zero)
         toastContainer.backgroundColor = .black.withAlphaComponent(0.6)
         toastContainer.alpha = 0.0
         toastContainer.layer.cornerRadius = 8
+        toastContainer.isUserInteractionEnabled = false
 
         let toastLabel = UILabel(frame: .zero)
         toastLabel.textColor = UIColor.white
@@ -41,11 +42,15 @@ extension UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn, animations: {
             toastContainer.alpha = 1.0
         }, completion: { _ in
-            UIView.animate(withDuration: 0.5, delay: 3.5, options: .curveEaseOut, animations: {
-                toastContainer.alpha = 0.0
-            }, completion: {_ in
-                toastContainer.removeFromSuperview()
-            })
+            if autohide {
+                UIView.animate(withDuration: 0.5, delay: 3.5, options: .curveEaseOut, animations: {
+                    toastContainer.alpha = 0.0
+                }, completion: {_ in
+                    toastContainer.removeFromSuperview()
+                })
+            }
         })
+
+        return toastContainer
     }
 }

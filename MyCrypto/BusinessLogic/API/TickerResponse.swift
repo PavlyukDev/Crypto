@@ -20,7 +20,7 @@ struct TickerResponse: Decodable, Equatable {
         case 0:
             let idValue = try container.decode(String.self)
             if idValue.hasPrefix("f") {
-                throw NSError(domain: "", code: 0)
+                throw MyCryptoError.unknown
             }
             id = idValue
         case 1:

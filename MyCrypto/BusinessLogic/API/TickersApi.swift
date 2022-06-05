@@ -19,8 +19,6 @@ extension ApiService: TickersApi {
                     resultCallback: @escaping ([TickerResponse]) -> Void,
                     errorCallback: @escaping (Error) -> Void) {
         provider.request(.tickers(symbols: tikers)) { result in
-//            errorCallback(NSError(domain: "some", code: 0))
-
             switch result {
             case .success(let response):
                 do {

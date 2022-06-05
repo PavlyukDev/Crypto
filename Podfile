@@ -8,7 +8,7 @@ target 'MyCrypto' do
   pod 'Alamofire'
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
-  pod 'Moya/RxSwift', '~> 15.0'
+  pod 'Moya', '~> 15.0'
 
   target 'MyCryptoTests' do
     inherit! :search_paths

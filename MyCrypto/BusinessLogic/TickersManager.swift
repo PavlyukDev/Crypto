@@ -15,9 +15,15 @@ protocol TickersManager {
     func startPolling()
 }
 
-enum MyCryptoError: Error, Equatable {
-    case noInternet
+enum MyCryptoError: Error, Equatable, LocalizedError {
     case unknown
+
+    var errorDescription: String {
+        switch self {
+        case .unknown:
+            return "Something went wrong."
+        }
+    }
 }
 
 final class TickersManagerImpl: TickersManager {
@@ -48,7 +54,6 @@ final class TickersManagerImpl: TickersManager {
             interval
         ])
         .subscribe(onNext: { response in
-            //            self.tickersSubject.on(.next(.failure(.unknown)))
             self.api.getTickers(tikers: self.selectedTickers.map{ $0.id }) { response in
                 self.tickersSubject.on(.next(.success(response)))
             } errorCallback: { error in

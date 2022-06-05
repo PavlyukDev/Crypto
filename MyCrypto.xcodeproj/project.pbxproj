@@ -32,6 +32,7 @@
 		51DFA9D5284CDB340067FF27 /* ListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DFA9D4284CDB340067FF27 /* ListViewModelTests.swift */; };
 		51DFA9D7284CE29C0067FF27 /* MultipleTickersResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 51DFA9D6284CE29C0067FF27 /* MultipleTickersResponse.json */; };
 		51DFA9D9284CE5890067FF27 /* TickersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DFA9D8284CE5890067FF27 /* TickersApi.swift */; };
+		51DFA9DC284D065D0067FF27 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DFA9DB284D065D0067FF27 /* NetworkHandler.swift */; };
 		B65EEDEBBA349CC8B550785C /* Pods_MyCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294464E017B9FDE1C185441F /* Pods_MyCryptoTests.framework */; };
 		CC6AAC8D5CB2060147A436AC /* Pods_MyCrypto_MyCryptoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1178F16EB68CCAF1717A6082 /* Pods_MyCrypto_MyCryptoUITests.framework */; };
 /* End PBXBuildFile section */
@@ -87,6 +88,7 @@
 		51DFA9D4284CDB340067FF27 /* ListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
 		51DFA9D6284CE29C0067FF27 /* MultipleTickersResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MultipleTickersResponse.json; sourceTree = "<group>"; };
 		51DFA9D8284CE5890067FF27 /* TickersApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersApi.swift; sourceTree = "<group>"; };
+		51DFA9DB284D065D0067FF27 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		5CCA711B6F114ACC415D4148 /* Pods_MyCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C68E175442FD02F8402BC5 /* Pods-MyCryptoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCryptoTests.debug.xcconfig"; path = "Target Support Files/Pods-MyCryptoTests/Pods-MyCryptoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D8172EEB718876B8CF0CB6FB /* Pods-MyCrypto-MyCryptoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCrypto-MyCryptoUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyCrypto-MyCryptoUITests/Pods-MyCrypto-MyCryptoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -206,11 +208,10 @@
 		5109FEA42848FB040090DA7A /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
-				5109FEA52848FB160090DA7A /* ApiService.swift */,
+				51DFA9DA284D05FB0067FF27 /* API */,
 				5109FEA72848FB410090DA7A /* TickersManager.swift */,
-				5109FEAC284B33150090DA7A /* TickerResponse.swift */,
 				5109FEAE284B811D0090DA7A /* Tickers.swift */,
-				51DFA9D8284CE5890067FF27 /* TickersApi.swift */,
+				51DFA9DB284D065D0067FF27 /* NetworkHandler.swift */,
 			);
 			path = BusinessLogic;
 			sourceTree = "<group>";
@@ -267,6 +268,16 @@
 				51DFA9D1284CCDFA0067FF27 /* JSONMapper.swift */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		51DFA9DA284D05FB0067FF27 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				5109FEAC284B33150090DA7A /* TickerResponse.swift */,
+				5109FEA52848FB160090DA7A /* ApiService.swift */,
+				51DFA9D8284CE5890067FF27 /* TickersApi.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		80FC77A3ACD5B42CD15E0962 /* Pods */ = {
@@ -562,6 +573,7 @@
 				51DFA9D9284CE5890067FF27 /* TickersApi.swift in Sources */,
 				51D0CFE2284CC1860040B335 /* UIViewController+Extension.swift in Sources */,
 				5109FE722847DCF90090DA7A /* SceneDelegate.swift in Sources */,
+				51DFA9DC284D065D0067FF27 /* NetworkHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
