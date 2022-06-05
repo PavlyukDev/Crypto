@@ -10,7 +10,14 @@ import RxSwift
 import Moya
 
 protocol TickersManager {
-    func start() -> Observable<[TickerModel]>
+    var tickersObservable: Observable<Result<[TickerResponse], MyCryptoError>> { get }
+
+    func startPolling()
+}
+
+enum MyCryptoError: Error, Equatable {
+    case noInternet
+    case unknown
 }
 
 final class TickersManagerImpl: TickersManager {
@@ -18,53 +25,30 @@ final class TickersManagerImpl: TickersManager {
         static let pollingInterval: Int = 5
     }
     private let api: ApiService
-    var tickers: [Ticker] = Ticker.allCases
+    private let tickersSubject: BehaviorSubject<Result<[TickerResponse], MyCryptoError>> = .init(value: .success([]))
+    private let bag = DisposeBag()
+
+    var tickersObservable: Observable<Result<[TickerResponse], MyCryptoError>> {
+        tickersSubject.asObserver()
+    }
+
+    var selectedTickers: [Ticker] = Ticker.allCases
+
 
     init(api: ApiService = ApiService()) {
         self.api = api
     }
 
-    func start() -> Observable<[TickerModel]> {
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 4
-        formatter.minimumFractionDigits = 0
-        formatter.numberStyle = .currency
-//        formatter.positiveFormat = "###,###,###,###.#### ¤"
-        formatter.currencySymbol = "$ "
-
-        return Observable<[TickerModel]>.create { observer -> Disposable in
-
-            let interval = Observable<Int>.interval(.seconds(Consts.pollingInterval), scheduler: MainScheduler.instance)
-
-
-            let subscription = interval
-                .flatMap { _ in
-                    return self.api.getTickers(tikers: self.tickers.map{ $0.id }).asObservable()
-                }
-                .subscribe(onNext: { response in
-                    do {
-                        let models = try response
-                            .map { response -> TickerModel in
-                                guard let ticker = Ticker(rawValue: response.id) else {
-                                    throw NSError(domain: "TickersManager.polling", code: 0)
-                                }
-                                return TickerModel(ticker: ticker,
-                                                   price: formatter.string(for: response.price) ?? "")
-                            }
-                        observer.onNext(models)
-                    } catch {
-                        observer.onError(error)
-                    }
-
-//                    observer.onCompleted()
-                },onError: { error in
-                    print(error)
-
-                })
-
-            return Disposables.create{
-                subscription.dispose()
+    func startPolling()  {
+        let interval = Observable<Int>.interval(.seconds(Consts.pollingInterval), scheduler: MainScheduler.instance)
+        interval.subscribe(onNext: { response in
+//            self.tickersSubject.on(.next(.failure(.unknown)))
+            self.api.getTickers(tikers: self.selectedTickers.map{ $0.id }) { response in
+                self.tickersSubject.on(.next(.success(response)))
+            } errorCallback: { error in
+                self.tickersSubject.on(.next(.failure(.unknown)))
             }
-        }
+        })
+        .disposed(by: bag)
     }
 }

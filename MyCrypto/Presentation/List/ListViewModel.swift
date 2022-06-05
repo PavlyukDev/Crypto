@@ -73,9 +73,19 @@ final class ListViewModel {
     private let manager: TickersManager
     private let bag = DisposeBag()
     private let tickersSubject: BehaviorRelay<[TickerModel]> = .init(value: [])
+    private lazy var formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 4
+        formatter.minimumFractionDigits = 0
+        formatter.numberStyle = .currency
+        //        formatter.positiveFormat = "###,###,###,###.#### ¤"
+        formatter.currencySymbol = "$ "
+        return formatter
+    }()
 
     private var selectedTickers: Set<TickerModel> = []
     private var isSearchEnabled: Bool = false
+    private let errorSubject: BehaviorRelay<Error?> = .init(value: nil)
 
     let searchSubject: BehaviorRelay<String?> = .init(value: nil)
 
@@ -85,6 +95,11 @@ final class ListViewModel {
             .map({ [weak self] models in
                 return self?.filter(with: models) ?? models
             })
+            .distinctUntilChanged()
+    }
+
+    var errorSignal: Driver<Error?> {
+        errorSubject.asDriver()
     }
 
     init(manager: TickersManager = TickersManagerImpl()) {
@@ -92,13 +107,16 @@ final class ListViewModel {
     }
 
     func start() {
-        manager.start()
+        manager.startPolling()
+        manager.tickersObservable
             .observe(on: MainScheduler())
-            .distinctUntilChanged()
             .subscribe(onNext: { [weak self] result in
-                self?.tickersSubject.accept(result)
-            }, onError: { error in
-                print(error)
+                switch result {
+                case .success(let models):
+                    self?.processResponse(models)
+                case .failure(let error):
+                    self?.processError(error)
+                }
             })
             .disposed(by: bag)
 
@@ -124,9 +142,32 @@ final class ListViewModel {
     }
 
     // MARK: - Private
-    private func updateModels() {
-        tickersSubject.accept(tickersSubject.value)
+
+    private func processResponse(_ response: [TickerResponse]) {
+        do {
+            let models = try response
+                .map { response -> TickerModel in
+                    guard let ticker = Ticker(rawValue: response.id) else {
+                        throw NSError(domain: "TickersManager.polling", code: 0)
+                    }
+                    return TickerModel(ticker: ticker,
+                                       price: formatter.string(for: response.price) ?? "")
+                }
+            tickersSubject.accept(models)
+        } catch {
+            processError(MyCryptoError.unknown)
+        }
     }
+
+    private func processError(_ error: Error) {
+        errorSubject.accept(error)
+    }
+
+    private func updateModels() {
+        let models = tickersSubject.value
+        tickersSubject.accept(models)
+    }
+
     private func chooseSelected(with text: String) {
         let models = tickersSubject.value
             .filter { model in
@@ -146,3 +187,4 @@ final class ListViewModel {
         return filtered
     }
 }
+

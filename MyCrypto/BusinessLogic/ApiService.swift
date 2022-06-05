@@ -9,20 +9,32 @@ import Foundation
 import Alamofire
 import Moya
 import RxSwift
-//const baseUrl = "https://api-pub.bitfinex.com/v2/";
-//const pathParams = "tickers"
-//const queryParams = "symbols=fUSD,tBTCUSD
 
 struct ApiService {
     private let provider: MoyaProvider<Crypto>
-    init(provider: MoyaProvider<Crypto> = MoyaProvider<Crypto>()) {
+    //plugins: [NetworkLoggerPlugin()]
+    init(provider: MoyaProvider<Crypto> = MoyaProvider<Crypto>() ) {
         self.provider = provider
     }
-    func getTickers(tikers: [String]) -> Single<[TickerResponse]> {
-        provider
-            .rx
-            .request(.tickers(symbols: tikers))
-            .map([TickerResponse].self)
+
+    func getTickers(tikers: [String],
+                    resultCallback: @escaping ([TickerResponse]) -> Void,
+                    errorCallback: @escaping (Error) -> Void){
+        provider.request(.tickers(symbols: tikers)) { result in
+//            errorCallback(NSError(domain: "some", code: 0))
+
+            switch result {
+            case .success(let response):
+                do {
+                    let tickers = try response.map([TickerResponse].self)
+                    resultCallback(tickers)
+                } catch {
+                    errorCallback(error)
+                }
+            case .failure(let error):
+                errorCallback(error)
+            }
+        }
     }
 }
 

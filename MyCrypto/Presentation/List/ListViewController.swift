@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 
 class ListViewController: UIViewController {
+
     private let tableView: UITableView = .init()
     private let viewModel = ListViewModel()
     private lazy var searchController: UISearchController = {
@@ -71,6 +72,13 @@ class ListViewController: UIViewController {
             .searchBar.rx
             .text
             .bind(to: viewModel.searchSubject)
+            .disposed(by: bag)
+
+        viewModel.errorSignal
+            .drive(onNext: { [weak self] error in
+                guard let error = error else { return }
+                self?.showToast(message: error.localizedDescription)
+            })
             .disposed(by: bag)
 
         searchController
