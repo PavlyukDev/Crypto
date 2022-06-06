@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIViewController {
+    @discardableResult
     func showToast(message: String, autohide: Bool = true) -> UIView {
         let toastContainer = UIView(frame: .zero)
         toastContainer.backgroundColor = .black.withAlphaComponent(0.6)

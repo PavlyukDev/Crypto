@@ -148,8 +148,8 @@
 		5109FE6E2847DCF90090DA7A /* MyCrypto */ = {
 			isa = PBXGroup;
 			children = (
-				5109FEA42848FB040090DA7A /* BusinessLogic */,
 				5109FEA32848F61D0090DA7A /* StartPoint */,
+				5109FEA42848FB040090DA7A /* BusinessLogic */,
 				5109FE9F2848F5DB0090DA7A /* Presentation */,
 				5109FEA02848F5F90090DA7A /* Resources */,
 			);
