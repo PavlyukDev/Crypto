@@ -54,10 +54,12 @@ final class TickerCell: UITableViewCell {
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             priceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
-            priceLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            priceLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            priceLabel.leadingAnchor.constraint(greaterThanOrEqualTo: titleStackView.trailingAnchor, constant: 8)
         ])
+        priceLabel.setContentHuggingPriority(.required, for: .horizontal)
 
-
+        titleLabel.numberOfLines = 0
         subtitleLabel.font = UIFont.systemFont(ofSize: 14)
         subtitleLabel.textColor = .gray
 

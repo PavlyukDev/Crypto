@@ -15,21 +15,22 @@ struct TickerResponse: Decodable, Equatable {
         var container = try decoder.unkeyedContainer()
         var id: String?
         var price: NSDecimalNumber?
-    outerloop: while !container.isAtEnd {
-        switch container.currentIndex {
-        case 0:
-            let idValue = try container.decode(String.self)
-            if idValue.hasPrefix("f") {
-                throw MyCryptoError.unknown
+        while !container.isAtEnd {
+            switch container.currentIndex {
+            case 0:
+                let idValue = try container.decode(String.self)
+                if idValue.hasPrefix("f") {
+                    throw MyCryptoError.unknown
+                }
+                id = idValue
+            case 7:
+                let priceValue = try container.decode(Float.self)
+                price = NSDecimalNumber(value: priceValue)
+            default:
+                _ = try container.decode(Float.self)
+                break
             }
-            id = idValue
-        case 1:
-            let priceValue = try container.decode(Float.self)
-            price = NSDecimalNumber(value: priceValue)
-        default:
-            break outerloop
         }
-    }
         if let id = id, let price = price {
             self.id = id
             self.price = price
