@@ -89,6 +89,7 @@
 		51DFA9D8284CE5890067FF27 /* TickersApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersApi.swift; sourceTree = "<group>"; };
 		51DFA9DB284D065D0067FF27 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		51DFA9E0284DD1860067FF27 /* TickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerModel.swift; sourceTree = "<group>"; };
+		51DFA9E4284DDA700067FF27 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5CCA711B6F114ACC415D4148 /* Pods_MyCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C68E175442FD02F8402BC5 /* Pods-MyCryptoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCryptoTests.debug.xcconfig"; path = "Target Support Files/Pods-MyCryptoTests/Pods-MyCryptoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D8172EEB718876B8CF0CB6FB /* Pods-MyCrypto-MyCryptoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCrypto-MyCryptoUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyCrypto-MyCryptoUITests/Pods-MyCrypto-MyCryptoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +127,7 @@
 		5109FE632847DCF90090DA7A = {
 			isa = PBXGroup;
 			children = (
+				51DFA9E4284DDA700067FF27 /* README.md */,
 				5109FE6E2847DCF90090DA7A /* MyCrypto */,
 				5109FE852847DCFD0090DA7A /* MyCryptoTests */,
 				5109FE8F2847DCFD0090DA7A /* MyCryptoUITests */,
