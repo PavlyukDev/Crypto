@@ -9,7 +9,6 @@ import Foundation
 import Alamofire
 import Moya
 
-
 struct ApiService {
     let provider: MoyaProvider<Crypto>
 

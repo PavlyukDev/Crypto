@@ -12,11 +12,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        if let window = window {
-            networkHandler = .init(uiHandler: UINetworkHandlerImpl(window: window))
-        }
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        let navigationController = UINavigationController()
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
+
+        networkHandler = .init(uiHandler: UINetworkHandlerImpl(window: window))
+
+        let viewModel = ListViewModelImpl()
+        let vc = ListViewController(viewModel: viewModel)
+        navigationController.viewControllers = [vc]
+
+
+//        router = Router(container: DIContainer.init(), navigaionController: navigationController)
+
+//        if let window = window {
+//
+//        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

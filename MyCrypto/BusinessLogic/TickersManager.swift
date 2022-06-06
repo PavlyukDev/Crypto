@@ -48,7 +48,8 @@ final class TickersManagerImpl: TickersManager {
     }
 
     func startPolling()  {
-        let interval = Observable<Int>.interval(.seconds(pollingInterval), scheduler: MainScheduler.instance)
+        let interval = Observable<Int>.interval(.seconds(pollingInterval),
+                                                scheduler: MainScheduler.instance)
         Observable<Int>.merge([
             Observable<Int>.just(0),
             interval

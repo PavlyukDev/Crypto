@@ -9,67 +9,16 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-enum TickerSection: Hashable {
-    case main
+protocol ListViewModel {
+    var tickers: Driver<[TickerModel]> { get }
+    var searchSubject: BehaviorRelay<String?> { get }
+    var errorSignal: Driver<Error?> { get }
+
+    func start()
+    func disableSearch()
 }
 
-struct TickerModel: Hashable {
-    let ticker: Ticker
-    let price: String
-    var name: String {
-        switch ticker {
-        case .BTC:
-            return "Bitcoin"
-        case .ETH:
-            return "Ethereum"
-        case .CHSB:
-            return "SwissBorg"
-        case .LTC:
-            return "Litecoin"
-        case .XRP:
-            return "XRP"
-        case .DSH:
-            return "Dashcoin"
-        case .RRT:
-            return "Recovery Right Token"
-        case .EOS:
-            return "EOS"
-        case .SAN:
-            return "Santiment Network Token"
-        case .DAT:
-            return "Datum"
-        case .SNT:
-            return "Status"
-        case .DOGE:
-            return "Dogecoin"
-        case .LUNA:
-            return "Terra"
-        case .MATIC:
-            return "Polygon"
-        case .NEXO:
-            return "Nexo"
-        case .OCEAN:
-            return "Ocean Protocol"
-        case .BEST:
-            return "Bitpanda Ecosystem Token"
-        case .AAVE:
-            return "Aave"
-        case .PLU:
-            return "Pluton"
-        case .FIL:
-            return "Filecoin"
-        }
-    }
-    var symbol: String {
-        let chars = ticker.rawValue
-            .replacingOccurrences(of: ":", with: "")
-            .dropFirst()
-            .dropLast(3)
-        return String(chars)
-    }
-}
-
-final class ListViewModel {
+final class ListViewModelImpl: ListViewModel {
     private let manager: TickersManager
     private let bag = DisposeBag()
     private let tickersSubject: BehaviorRelay<[TickerModel]> = .init(value: [])
@@ -79,7 +28,6 @@ final class ListViewModel {
         formatter.minimumFractionDigits = 0
         formatter.numberStyle = .currency
         formatter.decimalSeparator = "."
-        //        formatter.positiveFormat = "###,###,###,###.#### ¤"
         formatter.currencySymbol = "$"
         return formatter
     }()
@@ -172,8 +120,10 @@ final class ListViewModel {
     private func chooseSelected(with text: String) {
         let models = tickersSubject.value
             .filter { model in
-                return model.name.contains(text)
-                || model.symbol.contains(text)
+                return model.name.lowercased()
+                    .contains(text.lowercased())
+                || model.symbol.lowercased()
+                    .contains(text.lowercased())
             }
         selectedTickers = Set(models)
     }

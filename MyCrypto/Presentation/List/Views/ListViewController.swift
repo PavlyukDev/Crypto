@@ -8,10 +8,13 @@
 import UIKit
 import RxSwift
 
-class ListViewController: UIViewController {
+enum TickerSection: Hashable {
+    case main
+}
 
+final class ListViewController: UIViewController {
     private let tableView: UITableView = .init()
-    private let viewModel = ListViewModel()
+    private let viewModel: ListViewModel
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.showsSearchResultsController = true
@@ -34,6 +37,15 @@ class ListViewController: UIViewController {
         return dataSource
     }()
 
+    init(viewModel: ListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -42,6 +54,7 @@ class ListViewController: UIViewController {
 
     // MARK: - Private
     private func setupUI() {
+        view.backgroundColor = .white
         navigationItem.searchController = searchController
         definesPresentationContext = true
 
